@@ -1,0 +1,17 @@
+<ul class="accordion-standard {{module-class}} {{module-counter}}" {{#if module-id}}id="{{module-id}}"{{/if}}>
+  {{#each items}}
+  <li class="accordion-standard-item">
+    {{#ifvalue makeactive equals="on"}}
+    <{{headingtag}} class="accordion-title active" role="button" tabindex="0" aria-expanded="true">{{{title}}}</{{headingtag}}>
+    <div class="acc-content" style="display:block">
+      {{{content}}}
+    </div>
+    {{else}}
+    <{{headingtag}} class="accordion-title" role="button" tabindex="0" aria-expanded="false">{{{title}}}</{{headingtag}}>
+    <div class="acc-content">
+      {{{content}}}
+    </div>
+    {{/ifvalue}}
+  </li>
+  {{/each}}
+</ul>

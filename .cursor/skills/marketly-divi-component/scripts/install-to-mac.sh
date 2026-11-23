@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Install marketly-divi-component Cursor skill on Bob's Mac.
+# Install marketly-divi-component skill on Bob's Mac (Cursor and Claude Code).
 # Usage: install-to-mac.sh [SOURCE_DIR] [MARKETLY_REPO_ROOT]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE_DIR="${1:-$(dirname "$SCRIPT_DIR")}"
 PERSONAL_DEST="${HOME}/.cursor/skills/marketly-divi-component"
+CLAUDE_DEST="${HOME}/.claude/skills/marketly-divi-component"
 
 if [[ ! -f "${SOURCE_DIR}/SKILL.md" ]]; then
   echo "ERROR: SOURCE_DIR missing SKILL.md: ${SOURCE_DIR}" >&2
@@ -17,6 +18,12 @@ rsync -a --delete \
   --exclude 'scripts/' \
   "${SOURCE_DIR}/" "${PERSONAL_DEST}/"
 echo "Installed personal skill: ${PERSONAL_DEST}"
+
+mkdir -p "${CLAUDE_DEST}"
+rsync -a --delete \
+  --exclude 'scripts/' \
+  "${SOURCE_DIR}/" "${CLAUDE_DEST}/"
+echo "Installed personal skill: ${CLAUDE_DEST}"
 
 MARKETLY_ROOT="${2:-}"
 if [[ -z "${MARKETLY_ROOT}" ]]; then
